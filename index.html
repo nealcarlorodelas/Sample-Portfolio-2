@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Neal Carlo Rodelas — aspiring web developer portfolio." />
+  <title>Neal Carlo Rodelas | Web Developer Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111c30;
+      --blue: #2583ff;
+      --blue-light: #48b0ff;
+      --text: #eef4ff;
+      --muted: #b6c3d8;
+      --line: rgba(255,255,255,.12);
+      --light-bg: #f4f8ff;
+      --light-text: #14233c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1080px, 90%); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(10,18,32,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-size: 1.18rem; font-weight: 800; letter-spacing: -.4px; }
+    .brand span, .accent { color: var(--blue-light); }
+    .logo { color: var(--blue); font-weight: 900; margin-right: 8px; }
+    nav { display: flex; gap: 26px; align-items: center; }
+    nav a { color: var(--muted); font-size: .93rem; transition: color .2s; }
+    nav a:hover, nav a.active { color: white; }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: transparent; color: white; padding: 8px 11px; border-radius: 8px; cursor: pointer; }
+    .hero {
+      overflow: hidden; position: relative;
+      background: radial-gradient(circle at 78% 45%, #173d78 0, #0d1b31 29%, #0b1220 65%);
+      padding: 82px 0 86px;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 45px; align-items: center; }
+    .eyebrow { color: var(--blue-light); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: .78rem; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.3rem); line-height: 1.1; letter-spacing: -2px; margin: 12px 0 10px; }
+    .hero h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 500; color: #d3e4ff; margin-bottom: 20px; }
+    .hero p { max-width: 570px; color: var(--muted); font-size: 1.04rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 28px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 11px 19px; border-radius: 10px; font-weight: 700; border: 1px solid var(--blue); transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--blue); color: white; }
+    .btn-outline { color: white; background: transparent; }
+    .portrait-wrap { display: flex; justify-content: center; align-items: center; }
+    .portrait {
+      width: min(310px, 80vw); aspect-ratio: 1; border-radius: 50%;
+      background: linear-gradient(145deg, #1f70d6, #12294d);
+      border: 8px solid rgba(255,255,255,.08);
+      display: grid; place-items: center; color: white; font-size: 5rem; font-weight: 800;
+      box-shadow: 0 25px 80px rgba(0,0,0,.25);
+    }
+    section { padding: 72px 0; scroll-margin-top: 70px; }
+    .section-light { background: var(--light-bg); color: var(--light-text); }
+    .section-soft { background: #eaf2ff; color: var(--light-text); }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.35rem); line-height: 1.2; margin-bottom: 12px; letter-spacing: -.7px; }
+    .section-subtitle { color: #64748b; margin-bottom: 32px; max-width: 650px; }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 38px; align-items: start; }
+    .about-copy { color: #42516a; font-size: 1.02rem; }
+    .info-card { border: 1px solid #d7e5fb; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 8px 25px rgba(26,72,130,.06); }
+    .info-row { display: flex; gap: 13px; margin: 12px 0; }
+    .info-icon { color: var(--blue); font-weight: 900; width: 24px; }
+    .info-row small { display: block; color: #65748b; }
+    .skills-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+    .skill {
+      text-align: center; padding: 23px 12px; border: 1px solid #d9e7fb;
+      background: white; border-radius: 14px; transition: transform .2s, box-shadow .2s;
+    }
+    .skill:hover, .project:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(31,90,160,.12); }
+    .skill-symbol { width: 54px; height: 54px; display: grid; place-items: center; margin: 0 auto 10px; border-radius: 13px; background: #eaf3ff; color: var(--blue); font-size: 1.3rem; font-weight: 900; }
+    .skill h3 { font-size: .98rem; }
+    .skill p { font-size: .82rem; color: #65748b; margin-top: 5px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project { background: white; border: 1px solid #dce8f8; border-radius: 15px; padding: 22px; transition: transform .2s, box-shadow .2s; }
+    .project-number { color: var(--blue); font-size: .82rem; font-weight: 800; letter-spacing: 1px; }
+    .project h3 { margin: 8px 0; font-size: 1.12rem; }
+    .project p { color: #64748b; font-size: .93rem; margin-bottom: 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 17px; }
+    .tag { font-size: .75rem; background: #eaf3ff; color: #1c5eb3; padding: 4px 8px; border-radius: 6px; }
+    .project a { color: #126be0; font-weight: 700; font-size: .9rem; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 35px; }
+    .contact-copy { color: #42516a; }
+    .contact-links { margin-top: 22px; display: grid; gap: 10px; }
+    .contact-links a { color: #126be0; font-weight: 650; overflow-wrap: anywhere; }
+    form { background: white; padding: 25px; border: 1px solid #dce8f8; border-radius: 15px; }
+    label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 6px; }
+    input, textarea { width: 100%; padding: 12px 13px; border: 1px solid #cbd8ea; border-radius: 9px; font: inherit; color: #14233c; margin-bottom: 15px; background: #fbfdff; }
+    textarea { min-height: 125px; resize: vertical; }
+    input:focus, textarea:focus { outline: 2px solid #9ac8ff; border-color: var(--blue); }
+    form .btn { cursor: pointer; font: inherit; }
+    .form-note { font-size: .82rem; color: #64748b; margin-top: 10px; }
+    footer { background: #09111f; color: #aebbd0; text-align: center; padding: 22px 0; font-size: .87rem; }
+    .back-top { display: inline-block; margin-left: 8px; color: var(--blue-light); }
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding: 62px 0; }
+      .portrait-wrap { grid-row: 1; }
+      .portrait { width: 190px; font-size: 3.3rem; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      nav { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 18px 5%; background: #0b1220; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; gap: 14px; }
+      nav.open { display: flex; }
+      .menu-toggle { display: block; }
+    }
+    @media (max-width: 420px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .skill { padding: 17px 8px; }
+      .brand { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="logo">&lt;/&gt;</span> Neal Carlo <span>Rodelas</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰ Menu</button>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Welcome to my portfolio</p>
+          <h1>Hi, I'm <span class="accent">Neal Carlo Rodelas</span></h1>
+          <h2>Aspiring Web Developer</h2>
+          <p>I'm learning how to build clean, responsive, and user-friendly websites using HTML, CSS, and JavaScript. I'm excited to keep improving my skills and create useful experiences for the web.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">Explore My Projects ↗</a>
+            <a class="btn btn-outline" href="#contact">Contact Me</a>
+          </div>
+        </div>
+        <div class="portrait-wrap" aria-label="Profile placeholder">
+          <div class="portrait" title="Replace this circle with your photo">NR</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light" id="about">
+      <div class="container about-grid">
+        <div>
+          <h2 class="section-title">About Me</h2>
+          <p class="about-copy">Hello! I'm Neal Carlo Rodelas, an aspiring web developer who is currently learning the fundamentals of web development. My background is in Hotel and Restaurant Management, and I'm now building my technical skills through practice and personal projects. I'm hardworking, eager to learn, and open to opportunities where I can grow as a developer.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-row"><span class="info-icon">◆</span><div><strong>Education</strong><small>Hotel and Restaurant Management</small></div></div>
+          <div class="info-row"><span class="info-icon">⌖</span><div><strong>Location</strong><small>Philippines</small></div></div>
+          <div class="info-row"><span class="info-icon">✉</span><div><strong>Email</strong><small>yourname@example.com — replace with your email</small></div></div>
+          <div class="info-row"><span class="info-icon">↗</span><div><strong>Availability</strong><small>Open to entry-level and learning opportunities</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-soft" id="skills">
+      <div class="container">
+        <h2 class="section-title">My Skills</h2>
+        <p class="section-subtitle">Technologies I'm currently learning and practicing.</p>
+        <div class="skills-grid">
+          <article class="skill"><div class="skill-symbol">5</div><h3>HTML5</h3><p>Page structure</p></article>
+          <article class="skill"><div class="skill-symbol">3</div><h3>CSS3</h3><p>Styling and layout</p></article>
+          <article class="skill"><div class="skill-symbol">JS</div><h3>JavaScript</h3><p>Interactivity basics</p></article>
+          <article class="skill"><div class="skill-symbol">▣</div><h3>Responsive Design</h3><p>Mobile-friendly pages</p></article>
+          <article class="skill"><div class="skill-symbol">⌘</div><h3>Git & GitHub</h3><p>Version control basics</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light" id="projects">
+      <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <p class="section-subtitle">These are project ideas you can build as you practice. Replace the links with your real GitHub repositories when ready.</p>
+        <div class="projects-grid">
+          <article class="project">
+            <span class="project-number">PROJECT 01</span>
+            <h3>Personal Portfolio</h3>
+            <p>A responsive personal website to introduce myself, share my skills, and showcase my work.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Responsive</span></div>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub link ↗</a>
+          </article>
+          <article class="project">
+            <span class="project-number">PROJECT 02</span>
+            <h3>Simple Calculator</h3>
+            <p>A beginner-friendly calculator for practicing JavaScript functions and click events.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub link ↗</a>
+          </article>
+          <article class="project">
+            <span class="project-number">PROJECT 03</span>
+            <h3>To-Do List</h3>
+            <p>A task list that lets users add tasks and mark items as complete.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">DOM</span><span class="tag">CSS</span></div>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub link ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-soft" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <h2 class="section-title">Let's Connect</h2>
+          <p class="contact-copy">Have an opportunity, feedback, or a project idea? I'd be happy to hear from you. Update the sample contact details below before publishing your portfolio.</p>
+          <div class="contact-links">
+            <a href="mailto:yourname@example.com">✉ yourname@example.com</a>
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">⌘ github.com/yourusername</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">in LinkedIn profile</a>
+          </div>
+        </div>
+        <form id="contactForm">
+          <label for="name">Your Name</label>
+          <input id="name" name="name" type="text" placeholder="Enter your name" required />
+          <label for="email">Your Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+          <button class="btn btn-primary" type="submit">Prepare Email ↗</button>
+          <p class="form-note">This form opens your email app; it does not send messages directly from the website.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Neal Carlo Rodelas. Built while learning web development.
+      <a class="back-top" href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navigation = document.getElementById('navigation');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navigation.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '✕ Close' : '☰ Menu';
+    });
+
+    navigation.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navigation.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰ Menu';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const recipient = 'yourname@example.com'; // Replace with your real email address.
+      const subject = encodeURIComponent('Portfolio message from ' + name);
+      const body = encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message);
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
